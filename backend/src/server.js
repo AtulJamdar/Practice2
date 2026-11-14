@@ -1,7 +1,6 @@
 import express  from 'express';
 import conndb from '../src/config/db.js'
-
-const app = express();
+import app from './app.js';
 const PORT = 3000;
 
 const startServer = async () => {
@@ -16,4 +15,4 @@ const startServer = async () => {
 }
 }
 
-export default startServer;
+startServer();

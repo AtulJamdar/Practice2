@@ -1,9 +1,9 @@
 import vehical  from "../models/vehical.js";
 
-const createVehical = async (req,res) => {
+export const createVehical = async (req,res) => {
     const data = req.body;
-    if (!data) {
-        return res.status(400).json({message:"Check all fields are correct."});
+    if (!data.model) {
+        return res.status(400).json({message:"All fields are required."});
     }
 
     if(data.registration_no){
@@ -18,4 +18,13 @@ const createVehical = async (req,res) => {
     
 }
 
-export default createVehical;
+
+export const getAllVehical = async (req,res) => {
+    try {
+        const allvechicals = await vehical.find();
+        return res.status(200).json(allvechicals);
+    } catch (error) {
+        return res.status(400).json({message:error.message});
+    }
+}
+
