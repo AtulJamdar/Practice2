@@ -12,8 +12,8 @@ const vehicalSchema = new mongoose.Schema({
     required:true
  },
  make:{type:String, required:true},
- manufactorying_year:{type:Number, required:true, min:0},
- fule_type:{type:String, enum : ['Petrol', 'Diesel', 'CNG', 'Electric'], required:true},
+ manufacturing_year:{type:Number, required:true, min:0},
+ fuel_type:{type:String, enum : ['Petrol', 'Diesel', 'CNG', 'Electric'], required:true},
  odometer:{type:Number,required:true, min:0},
  nickname:{type:String,trim:true}
 },{
