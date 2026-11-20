@@ -67,12 +67,12 @@ export const Vehicles = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-md p-4 border rounded-lg bg-white shadow">
-  <input name="registration_no" value={formData.registration_no} onChange={handleOnchange} />
-  <input name="make" value={formData.make} onChange={handleOnchange} />
-  <input name="model" value={formData.model} onChange={handleOnchange} />
-  <input name="manufacturing_year" value={formData.manufacturing_year} onChange={handleOnchange} />
-  <input name="fuel_type" value={formData.fuel_type} onChange={handleOnchange} />
-  <input name="odometer" value={formData.odometer} onChange={handleOnchange} />
+  <input name="registration_no" value={formData.registration_no} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder="MH12AB1234" />
+  <input name="make" value={formData.make} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder='make'/>
+  <input name="model" value={formData.model} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder='model '/>
+  <input name="manufacturing_year" type='number' value={formData.manufacturing_year} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder='Manufacturing year 2004'/>
+  <input name="fuel_type" value={formData.fuel_type} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder='Fule type'/>
+  <input name="odometer" type='number' value={formData.odometer} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder='odometer 203'/>
   ...
   <button type="submit">Add Vehicle</button>
 </form>
