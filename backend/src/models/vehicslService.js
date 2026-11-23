@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import vehical from './vehical';
+
 
 const vehicalServiceSchema = new mongoose.Schema(
     {
-        vehical:{type:mongoose.Schema.Types.ObjectId, ref:vehical, required:true},
+        vehical:{type:mongoose.Schema.Types.ObjectId, ref:'Vehical', required:true},
         serviceType:{type:String, required:true},
         shedule_date:{type:Date, required: true},
         estimate_cost:{type:Number, required:true},

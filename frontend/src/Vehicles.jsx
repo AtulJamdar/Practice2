@@ -53,6 +53,23 @@ export const Vehicles = () => {
       
     }
 
+    const handledeleteVehical = async (id) => {
+      const ok = window.confirm("Are you sure");
+      if(!ok) return;
+      const deletevehical = await fetch('http://localhost:3000/api/vehicles/' + id, 
+        {
+          method:'DELETE',
+    
+        }
+      )
+      if(!deletevehical.ok){
+        return;
+      }
+
+      setVehicles(vehicles.filter((v) => v._id !== id));
+
+    }
+
     const handleOnchange = (e) => {
       const {name,value} = e.target;
       setFormData((prev) => ({
@@ -63,8 +80,36 @@ export const Vehicles = () => {
   return (
     <>
       <div>
-        vehicles : {vehicles.map((v) => <p key={v._id}>{v.registration_no}</p>)}
+       <h3>vehicles :</h3> 
       </div>
+
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Registration No</th>
+      <th scope="col">Make</th>
+      <th scope="col">Model</th>
+      <th scope="col">Manufacturing_year</th>
+      <th scope='col'>fuel_type</th>
+      <th scope='col'>Odometer</th>
+    </tr>
+  </thead>
+  <tbody>
+    {vehicles.map((v) => (
+    <tr key={v._id}>
+      <th scope="row">1</th>
+      <td>{v.registration_no}</td>
+      <td>{v.make}</td>
+      <td>{v.model}</td>
+      <td>{v.manufacturing_year}</td>
+      <td>{v.fuel_type}</td>
+      <td>{v.odometer}</td>
+      <button onClick={() => handledeleteVehical(v._id)}>Delete</button>
+    </tr>
+    ))}
+  </tbody>
+</table>
+
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-md p-4 border rounded-lg bg-white shadow">
   <input name="registration_no" value={formData.registration_no} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder="MH12AB1234" />
