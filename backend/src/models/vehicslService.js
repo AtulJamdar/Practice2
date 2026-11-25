@@ -1,17 +1,18 @@
 import mongoose from 'mongoose';
 
-
-const vehicalServiceSchema = new mongoose.Schema(
+const vehicleServiceSchema = new mongoose.Schema(
     {
-        vehical:{type:mongoose.Schema.Types.ObjectId, ref:'Vehical', required:true},
-        serviceType:{type:String, required:true},
-        shedule_date:{type:Date, required: true},
-        estimate_cost:{type:Number, required:true},
-        service_center:{type:String, required: true},
-        notes:{type:String}
-    },{
+        vehicle: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle', required: true },
+        serviceType: { type: String, required: true },
+        scheduledDate: { type: Date, required: true },
+        estimatedCost: { type: Number, required: true },
+        serviceCenter: { type: String, required: true },
+        notes: { type: String },
+        status: { type: String, default: "Scheduled" }
+    },
+    {
         timestamps: true
     }
 )
-export default mongoose.model('VehicalService', vehicalServiceSchema)
 
+export default mongoose.model('VehicleService', vehicleServiceSchema)

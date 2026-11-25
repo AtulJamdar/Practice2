@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 import { Vehicles } from './Vehicles'
+import { Services } from './Services'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-       <h1 className="text-3xl font-bold underline">
-    Hello world!
     <Vehicles/>
-  </h1>
+    <Services/>
     </>
   )
 }

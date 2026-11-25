@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 export const Vehicles = () => {
     const [vehicles, setVehicles] = useState([]);
+    const [editingId, setEditingId] = useState(null);
     const [formData, setFormData] = useState({
       registration_no: "",
       make: "",
@@ -30,10 +31,33 @@ export const Vehicles = () => {
         
     },[])
 
-    //post data 
+    //post data  and edit data
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const postvehicle = await fetch('http://localhost:3000/api/vehicles',
+
+      if(editingId){
+        
+
+       const updatedVehical = await fetch('http://localhost:3000/api/vehicles/' + editingId,
+        {
+          method:"PUT",
+          headers:{'Content-Type' : 'application/json'},
+          body:JSON.stringify(formData)
+        }
+       ) 
+       const result = await updatedVehical.json();
+       setVehicles(vehicles.map((v) => v._id === editingId ? result : v));
+       setEditingId(null);
+       setFormData({
+        registration_no: "",
+  make: "",
+  model: "",
+  manufacturing_year: "",
+  fuel_type: "",
+  odometer: ""
+       });
+      }else{
+        const postvehicle = await fetch('http://localhost:3000/api/vehicles/',
         {
           method: "POST",
         headers: {'Content-Type': 'application/json'},
@@ -50,7 +74,24 @@ export const Vehicles = () => {
         fuel_type: "",
         odometer: ""
       })
+      }
       
+      
+    }
+
+    const handleUpdateVehical =  (v) =>{
+
+      setFormData({
+        registration_no: v.registration_no,
+        make: v.make,
+        model: v.model,
+        manufacturing_year: v.manufacturing_year,
+        fuel_type: v.fuel_type,
+        odometer: v.odometer
+      });
+
+      setEditingId(v._id);
+
     }
 
     const handledeleteVehical = async (id) => {
@@ -83,7 +124,7 @@ export const Vehicles = () => {
        <h3>vehicles :</h3> 
       </div>
 
-      <table class="table">
+      <table className="table">
   <thead>
     <tr>
       <th scope="col">Registration No</th>
@@ -104,7 +145,8 @@ export const Vehicles = () => {
       <td>{v.manufacturing_year}</td>
       <td>{v.fuel_type}</td>
       <td>{v.odometer}</td>
-      <button onClick={() => handledeleteVehical(v._id)}>Delete</button>
+      <td><button onClick={() => handledeleteVehical(v._id)}>Delete</button></td>
+      <td><button onClick={() => handleUpdateVehical(v)}>Edit</button></td>
     </tr>
     ))}
   </tbody>
@@ -119,7 +161,7 @@ export const Vehicles = () => {
   <input name="fuel_type" value={formData.fuel_type} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder='Fule type'/>
   <input name="odometer" type='number' value={formData.odometer} onChange={handleOnchange} className="border border-gray-300 rounded-md px-3 py-2 outline-none focus:border-black" placeholder='odometer 203'/>
   ...
-  <button type="submit">Add Vehicle</button>
+  <button type="submit">{editingId ? "Update Vehicle" : "Add Vehicle"}</button>
 </form>
     </>
 

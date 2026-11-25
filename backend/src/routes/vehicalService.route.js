@@ -3,9 +3,9 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('/',createService);
+router.post('/',createService);
 router.get('/',getAllServices);
-router.get('/:id',updateService);
-router.get('/:id',deleteService);
+router.put('/:id',updateService);
+router.delete('/:id',deleteService);
 
 export default router;
